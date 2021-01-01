@@ -83,10 +83,10 @@ async function getNews (birthday) {
 function displayNews (news) {
   const newsIndexNum = getNewsIndexNum(news)
   try {
-    for (let index = 0; index < newsIndexNum.length; index++) {
-      console.log(`🔎  ${color.bold.green.underline(news.body.response.docs[newsIndexNum[index]].headline.main)}\n\n` +
-      `${news.body.response.docs[newsIndexNum[index]].lead_paragraph}\n\n\n`)
-    }
+    newsIndexNum.forEach(index => {
+      console.log(`🔎  ${color.bold.green.underline(news.body.response.docs[index].headline.main)}\n\n` +
+      `${news.body.response.docs[index].lead_paragraph}\n\n\n`)
+    })
   } catch (error) {
     console.error(error.message)
   }
