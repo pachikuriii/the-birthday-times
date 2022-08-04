@@ -49,7 +49,7 @@ async function getBirthdayNews () {
 async function displayNews (birthday) {
   const response = await getRequest(birthday)
   const newsIndexNum = getNewsIndexNum()
-  await loadingMessage()
+  loadingMessage()
   try {
     for (let index = 0; index < newsIndexNum.length; index++) {
       console.log('🔎 ' + color.bold.green.underline(response.body.response.docs[newsIndexNum[index]].headline.main + '\n'))
