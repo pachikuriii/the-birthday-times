@@ -84,7 +84,7 @@ function getNewsIndexNum () {
   return newsIndexNum
 }
 
-async function countDown () {
+function countDown () {
   process.stdout.write('\n\n\n                 .')
   blockTime(700)
   process.stdout.write('.')
