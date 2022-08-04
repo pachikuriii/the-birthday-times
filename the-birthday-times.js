@@ -96,7 +96,7 @@ function countDown () {
   process.stdout.write('.')
   blockTime(700)
   console.log(' Now going back to your birthday' + '\n\n\n')
-  blockTime(700)
+  blockTime(1200)
 }
 
 function blockTime (timeout) {
