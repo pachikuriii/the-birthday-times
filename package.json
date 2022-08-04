@@ -1,6 +1,6 @@
 {
   "name": "the-birthday-times",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "shows articles published on your birthday from The New York Times.",
   "main": "the-birthday-times.js",
   "scripts": {
@@ -35,7 +35,7 @@
     "eslint-plugin-promise": "^6.0.0"
   },
   "preferGlobal": true,
-    "bin":{
-        "the-birthday-times": "the-birthday-times.js"
-    }
+  "bin": {
+    "the-birthday-times": "the-birthday-times.js"
+  }
 }
