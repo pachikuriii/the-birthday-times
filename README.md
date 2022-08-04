@@ -16,6 +16,7 @@ $ npm i -g the-birthday-times
 $ export NYTIMES_KEY='YOUR-API-KEY'
 ```
 🔑 You need The New York Times Developer Network account to create API key.
+
 More info is [here](https://developer.nytimes.com/get-started)
 
 
