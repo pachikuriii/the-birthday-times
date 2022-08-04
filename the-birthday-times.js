@@ -1,7 +1,7 @@
-const needle = require('needle')
-const dayjs = require('dayjs')
-const prompts = require('prompts')
-const color = require('ansi-colors')
+const needle = require("needle")
+const dayjs = require("dayjs")
+const prompts = require("prompts")
+const color = require("ansi-colors")
 
 function main () {
   try {
