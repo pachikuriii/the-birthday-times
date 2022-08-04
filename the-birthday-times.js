@@ -43,39 +43,13 @@ async function getBirthdayNews () {
   ]
   const response = await prompts(question)
   const birthday = dayjs(response.birthday).add(1, 'month')
-  setTimeout(countDown)
   displayNews(birthday)
-}
-
-function countDown () {
-  process.stdout.write('\n\n\n                 .')
-  blockTime(700)
-  process.stdout.write('.')
-  blockTime(700)
-  process.stdout.write('.')
-  blockTime(700)
-  process.stdout.write('.')
-  blockTime(700)
-  process.stdout.write('.')
-  blockTime(700)
-  console.log(' Now going back to your birthday' + '\n\n\n')
-  blockTime(700)
-}
-
-function blockTime (timeout) {
-  const startTime = Date.now()
-  while (true) {
-    const diffTime = Date.now() - startTime
-    if (diffTime >= timeout) {
-      return
-    }
-  }
 }
 
 async function displayNews (birthday) {
   const response = await getRequest(birthday)
   const newsIndexNum = getNewsIndexNum()
-
+  countDown()
   try {
     for (let index = 0; index < newsIndexNum.length; index++) {
       console.log('🔎 ' + color.bold.green.underline(response.body.response.docs[newsIndexNum[index]].headline.main + '\n'))
@@ -109,4 +83,30 @@ function getNewsIndexNum () {
   }
   return newsIndexNum
 }
+
+function countDown () {
+  process.stdout.write('\n\n\n                 .')
+  blockTime(700)
+  process.stdout.write('.')
+  blockTime(700)
+  process.stdout.write('.')
+  blockTime(700)
+  process.stdout.write('.')
+  blockTime(700)
+  process.stdout.write('.')
+  blockTime(700)
+  console.log(' Now going back to your birthday' + '\n\n\n')
+  blockTime(700)
+}
+
+function blockTime (timeout) {
+  const startTime = Date.now()
+  while (true) {
+    const diffTime = Date.now() - startTime
+    if (diffTime >= timeout) {
+      return
+    }
+  }
+}
+
 main()

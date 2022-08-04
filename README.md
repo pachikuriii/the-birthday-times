@@ -3,7 +3,9 @@
 
 Shows articles published on your birthday from The New York Times.
  
+
 # Installation
+Install with npm:
 ```
 $ npm i -g the-birthday-times
 ```
@@ -13,7 +15,7 @@ $ npm i -g the-birthday-times
 ```
 $ export NYTIMES_KEY='YOUR-API-KEY'
 ```
-⚡️ You need The New York Times Developer Network account to create API key. More info is [here](https://developer.nytimes.com/get-started)
+🔑 You need The New York Times Developer Network account to create API key. More info is [here](https://developer.nytimes.com/get-started)
 
 
 ## 2. Run `$ the-birthday-times`
@@ -25,3 +27,7 @@ $ export NYTIMES_KEY='YOUR-API-KEY'
 
 ## 4. The result appears.
 ![image](https://user-images.githubusercontent.com/58751858/182620539-38de904d-0921-41dc-9a63-da8495c6c7a4.png)
+
+
+# Note
+The range of birthdate is from 1981 to today.
