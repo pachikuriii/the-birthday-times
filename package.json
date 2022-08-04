@@ -1,6 +1,6 @@
 {
   "name": "the-birthday-times",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "shows articles published on your birthday from The New York Times.",
   "main": "the-birthday-times.js",
   "scripts": {
