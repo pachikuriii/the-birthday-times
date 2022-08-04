@@ -34,8 +34,7 @@
     "eslint-plugin-n": "^15.2.4",
     "eslint-plugin-promise": "^6.0.0"
   },
-  "preferGlobal": true,
   "bin": {
-    "the-birthday-times": "the-birthday-times.js"
+    "the-birthday-times": "./the-birthday-times.js"
   }
 }
