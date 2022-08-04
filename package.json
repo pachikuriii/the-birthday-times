@@ -1,0 +1,41 @@
+{
+  "name": "the-birthday-times",
+  "version": "1.0.0",
+  "description": "shows articles published on your birthday from The New York Times.",
+  "main": "the-birthday-times.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pachikuriii/the_birthday_times.git"
+  },
+  "keywords": [
+    "newyorktimes",
+    "birthday",
+    "cli"
+  ],
+  "author": "Saya Takahashi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pachikuriii/the_birthday_times/issues"
+  },
+  "homepage": "https://github.com/pachikuriii/the_birthday_times#readme",
+  "dependencies": {
+    "ansi-colors": "^4.1.3",
+    "dayjs": "^1.11.4",
+    "needle": "^3.1.0",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.21.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-promise": "^6.0.0"
+  },
+  "preferGlobal": true,
+    "bin":{
+        "the-birthday-times": "the-birthday-times.js"
+    }
+}
