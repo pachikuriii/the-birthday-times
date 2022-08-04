@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pachikuriii/the_birthday_times.git"
+    "url": "git+https://github.com/pachikuriii/the-birthday-times.git"
   },
   "keywords": [
     "newyorktimes",
@@ -18,9 +18,9 @@
   "author": "Saya Takahashi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pachikuriii/the_birthday_times/issues"
+    "url": "https://github.com/pachikuriii/the-birthday-times/issues"
   },
-  "homepage": "https://github.com/pachikuriii/the_birthday_times#readme",
+  "homepage": "https://github.com/pachikuriii/the-birthday-times#readme",
   "dependencies": {
     "ansi-colors": "^4.1.3",
     "dayjs": "^1.11.4",
