@@ -77,7 +77,7 @@ function getNewsIndexNum (response) {
   const articleNum = response.body.response.docs.length
   const newsIndexNum = []
   while (newsIndexNum.length <= 2) {
-    const index = Math.floor(Math.random() * (articleNum - 1) + 1)
+    const index = Math.floor(Math.random() * articleNum)
     if (newsIndexNum[0] !== index && newsIndexNum[newsIndexNum.length - 1] !== index) {
       newsIndexNum.push(index)
     }
