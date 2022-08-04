@@ -48,7 +48,7 @@ async function getBirthdayNews () {
 
 async function displayNews (birthday) {
   const response = await getRequest(birthday)
-  const newsIndexNum = getNewsIndexNum()
+  const newsIndexNum = getNewsIndexNum(response)
   loadingMessage()
   try {
     for (let index = 0; index < newsIndexNum.length; index++) {
@@ -73,10 +73,11 @@ async function getRequest (birthday) {
   }
 }
 
-function getNewsIndexNum () {
+function getNewsIndexNum (response) {
+  const articleNum = response.body.response.docs.length
   const newsIndexNum = []
   while (newsIndexNum.length <= 2) {
-    const index = Math.floor(Math.random() * (11 - 1) + 1)
+    const index = Math.floor(Math.random() * (articleNum - 1) + 1)
     if (newsIndexNum[0] !== index && newsIndexNum[newsIndexNum.length - 1] !== index) {
       newsIndexNum.push(index)
     }
