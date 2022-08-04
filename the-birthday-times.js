@@ -49,7 +49,7 @@ async function getBirthdayNews () {
 async function displayNews (birthday) {
   const response = await getRequest(birthday)
   const newsIndexNum = getNewsIndexNum()
-  await countDown()
+  await loadingMessage()
   try {
     for (let index = 0; index < newsIndexNum.length; index++) {
       console.log('🔎 ' + color.bold.green.underline(response.body.response.docs[newsIndexNum[index]].headline.main + '\n'))
@@ -84,17 +84,12 @@ function getNewsIndexNum () {
   return newsIndexNum
 }
 
-function countDown () {
+function loadingMessage () {
   process.stdout.write('\n\n\n                 .')
-  blockTime(700)
-  process.stdout.write('.')
-  blockTime(700)
-  process.stdout.write('.')
-  blockTime(700)
-  process.stdout.write('.')
-  blockTime(700)
-  process.stdout.write('.')
-  blockTime(700)
+  for (let index = 0; index <= 3; index++) {
+    blockTime(700)
+    process.stdout.write('.')
+  }
   console.log(' Now going back to your birthday' + '\n\n\n')
   blockTime(1200)
 }
