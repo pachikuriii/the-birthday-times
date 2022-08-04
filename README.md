@@ -1,5 +1,6 @@
 # 🗞 the-birthday-times 🗞
 ![image](https://user-images.githubusercontent.com/58751858/182638789-a1eef5f4-5f01-4ec8-95a5-3c3c283fdc39.png)
+
 Shows articles published on your birthday from The New York Times.
  
 # Installation
