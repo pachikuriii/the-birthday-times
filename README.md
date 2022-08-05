@@ -3,6 +3,9 @@
 
 Shows articles published on your birthday from The New York Times.
  
+ 
+# Demo
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/58751858/183071238-052a72ed-c805-44f3-a81e-57f86d37470f.gif)
 
 # Installation
 Install with npm:
