@@ -1,7 +1,7 @@
 {
   "name": "the-birthday-times",
-  "version": "1.0.8",
-  "description": "shows articles published on your birthday from The New York Times.",
+  "version": "1.0.7",
+  "description": "shows The New York Times articles for the day you were born.",
   "main": "the-birthday-times.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,14 +27,14 @@
     "needle": "^3.1.0",
     "prompts": "^2.4.2"
   },
+  "bin": {
+    "the-birthday-times": "./the-birthday-times.js"
+  },
   "devDependencies": {
     "eslint": "^8.21.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.4",
     "eslint-plugin-promise": "^6.0.0"
-  },
-  "bin": {
-    "the-birthday-times": "./the-birthday-times.js"
   }
 }
