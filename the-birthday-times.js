@@ -6,19 +6,14 @@ const prompts = require('prompts')
 const dedent = require('dedent')
 const color = require('ansi-colors')
 
-function main () {
-  try {
-    if (!process.env.NYTIMES_KEY) {
-      throw new Error(color.red("Please set your API key on your operating system.\nTo set environment variables on macOS or Linux, run the export command from the terminal: export NYTIMES_KEY='YOUR-API-KEY'\n"))
-    }
-    showFirstMessage()
-    getBirthdayNews()
-  } catch (error) {
-    console.log(error.message)
-  }
+async function main () {
+  showTitle()
+  const news = await getNews(await getBirthday())
+  loadingMessage()
+  displayNews(news)
 }
 
-function showFirstMessage () {
+function showTitle () {
   const title = dedent`:￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣:
     :                                                                      :
     :              🗞   ${color.bold('T h e   B i r t h d a y   T i m e s 🗞')}               :
@@ -28,7 +23,7 @@ function showFirstMessage () {
   console.log('\n' + title + '\n\n')
 }
 
-async function getBirthdayNews () {
+async function getBirthday () {
   const question = [
     {
       type: 'date',
@@ -45,24 +40,11 @@ async function getBirthdayNews () {
   ]
   const response = await prompts(question)
   const birthday = dayjs(response.birthday).add(1, 'month')
-  displayNews(birthday)
+  return birthday
 }
 
-async function displayNews (birthday) {
-  const response = await getRequest(birthday)
-  const newsIndexNum = getNewsIndexNum(response)
-  loadingMessage()
-  try {
-    for (let index = 0; index < newsIndexNum.length; index++) {
-      console.log('🔎 ' + color.bold.green.underline(response.body.response.docs[newsIndexNum[index]].headline.main + '\n'))
-      console.log(response.body.response.docs[newsIndexNum[index]].lead_paragraph + '\n\n\n')
-    }
-  } catch (error) {
-    console.log('🔎 ' + color.bold.red.underline('Sorry...the article cannot be found.\n\n\n\n'))
-  }
-}
-
-async function getRequest (birthday) {
+async function getNews (birthday) {
+  checkApiKey()
   const birthYear = (birthday.$y)
   const birthMonth = (birthday.$M)
   const birthDate = (birthday.$D)
@@ -75,16 +57,14 @@ async function getRequest (birthday) {
   }
 }
 
-function getNewsIndexNum (response) {
-  const articleNum = response.body.response.docs.length
-  const newsIndexNum = []
-  while (newsIndexNum.length <= 2) {
-    const index = Math.floor(Math.random() * articleNum)
-    if (newsIndexNum[0] !== index && newsIndexNum[newsIndexNum.length - 1] !== index) {
-      newsIndexNum.push(index)
+function checkApiKey () {
+  try {
+    if (!process.env.NYTIMES_KEY) {
+      throw new Error(color.red("Please set your API key on your operating system.\nTo set environment variables on macOS or Linux, run the export command from the terminal: export NYTIMES_KEY='YOUR-API-KEY'\n"))
     }
+  } catch (error) {
+    console.log(error.message)
   }
-  return newsIndexNum
 }
 
 function loadingMessage () {
@@ -105,6 +85,30 @@ function blockTime (timeout) {
       return
     }
   }
+}
+
+function displayNews (news) {
+  const newsIndexNum = getNewsIndexNum(news)
+  try {
+    for (let index = 0; index < newsIndexNum.length; index++) {
+      console.log('🔎 ' + color.bold.green.underline(news.body.response.docs[newsIndexNum[index]].headline.main + '\n'))
+      console.log(news.body.response.docs[newsIndexNum[index]].lead_paragraph + '\n\n\n')
+    }
+  } catch (error) {
+    console.log('🔎 ' + color.bold.red.underline('Sorry...the article cannot be found.\n\n\n\n'))
+  }
+}
+
+function getNewsIndexNum (response) {
+  const articleNum = response.body.response.docs.length
+  const newsIndexNum = []
+  while (newsIndexNum.length <= 2) {
+    const index = Math.floor(Math.random() * articleNum)
+    if (newsIndexNum[0] !== index && newsIndexNum[newsIndexNum.length - 1] !== index) {
+      newsIndexNum.push(index)
+    }
+  }
+  return newsIndexNum
 }
 
 main()
