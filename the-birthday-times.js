@@ -3,6 +3,7 @@
 const needle = require('needle')
 const dayjs = require('dayjs')
 const prompts = require('prompts')
+const dedent = require('dedent')
 const color = require('ansi-colors')
 
 function main () {
@@ -18,14 +19,13 @@ function main () {
 }
 
 function showFirstMessage () {
-  console.log('\n' +
-':￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣: \n' +
-':                                                                      :')
-  console.log(color.bold(':              🗞   T h e   B i r t h d a y   T i m e s 🗞               :'))
-  console.log(
-    ':                                                                      : \n' +
-':                                                                      : \n' +
-' ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣ \n\n')
+  const title = dedent`:￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣:
+    :                                                                      :
+    :              🗞   ${color.bold('T h e   B i r t h d a y   T i m e s 🗞')}               :
+    :                                                                      :
+    :                                                                      :
+     ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣`
+  console.log('\n' + title + '\n\n')
 }
 
 async function getBirthdayNews () {
@@ -38,7 +38,7 @@ async function getBirthdayNews () {
       validate: date => date > dayjs()
         ? 'Not in the future'
         : true &&
-      date < dayjs('1981/1/1')
+          date < dayjs('1981/1/1')
           ? 'Not before 1981'
           : true
     }
