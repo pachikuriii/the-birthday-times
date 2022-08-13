@@ -79,7 +79,7 @@ class Birthday {
         `${news.body.response.docs[newsIndexNum[index]].lead_paragraph}\n\n\n`)
       }
     } catch (error) {
-      console.log(`🔎  ${color.bold.red.underline('Sorry...the article cannot be found.')}\n\n\n\n`)
+      console.error(error.message)
     }
   }
 
@@ -89,7 +89,7 @@ class Birthday {
         throw new Error(color.red("Please set your API key on your operating system.\nTo set environment variables on macOS or Linux, run the export command from the terminal: export NYTIMES_KEY='YOUR-API-KEY'\n"))
       }
     } catch (error) {
-      console.log(error.message)
+      console.error(error.message)
     }
   }
 
