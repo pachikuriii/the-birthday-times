@@ -53,8 +53,8 @@ async function getBirthday () {
           : true
     }
   ]
-  const response = await prompts(question)
-  return dayjs(response.birthday).add(1, 'month')
+  const answer = await prompts(question)
+  return dayjs(answer.birthday).add(1, 'month')
 }
 
 async function loadingMessage () {
@@ -63,7 +63,7 @@ async function loadingMessage () {
     await setTimeout(700)
     process.stdout.write('.')
   }
-  console.log(' Now going back to your birthday' + '\n\n\n')
+  console.log(' Now going back to your birthday\n\n\n')
   await setTimeout(1000)
 }
 
@@ -77,20 +77,20 @@ async function getNews (birthday) {
   }
 }
 
-function displayNews (response) {
-  const newsIndexNum = getNewsIndexNum(response)
+function displayNews (news) {
+  const newsIndexNum = getNewsIndexNum(news)
   try {
     for (let index = 0; index < newsIndexNum.length; index++) {
-      console.log(`🔎  ${color.bold.green.underline(response.body.response.docs[newsIndexNum[index]].headline.main)}\n\n` +
-      `${response.body.response.docs[newsIndexNum[index]].lead_paragraph}\n\n\n`)
+      console.log(`🔎  ${color.bold.green.underline(news.body.response.docs[newsIndexNum[index]].headline.main)}\n\n` +
+      `${news.body.response.docs[newsIndexNum[index]].lead_paragraph}\n\n\n`)
     }
   } catch (error) {
     console.error(error.message)
   }
 }
 
-function getNewsIndexNum (response) {
-  const articleNum = response.body.response.docs.length
+function getNewsIndexNum (news) {
+  const articleNum = news.body.response.docs.length
   const newsIndexNum = []
   while (newsIndexNum.length <= 2) {
     const index = Math.floor(Math.random() * articleNum)
