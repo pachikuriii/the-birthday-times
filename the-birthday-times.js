@@ -7,23 +7,23 @@ const dedent = require('dedent')
 const color = require('ansi-colors')
 const { setTimeout } = require('timers/promises')
 
-async function main () {
-  checkApiKey()
+function main () {
+  try {
+    if (!process.env.NYTIMES_KEY) {
+      throw new Error(color.red("Please set your API key on your operating system.\nTo set environment variables on macOS or Linux, run the export command from the terminal: export NYTIMES_KEY='YOUR-API-KEY'"))
+    }
+    exec()
+  } catch (error) {
+    console.error(error.message)
+  }
+}
+
+async function exec () {
   showTitle()
   const birthday = await getBirthday()
   const news = await getNews(birthday)
   await loadingMessage()
   displayNews(news)
-}
-
-function checkApiKey () {
-  try {
-    if (!process.env.NYTIMES_KEY) {
-      throw new Error(color.red("Please set your API key on your operating system.\nTo set environment variables on macOS or Linux, run the export command from the terminal: export NYTIMES_KEY='YOUR-API-KEY'\n"))
-    }
-  } catch (error) {
-    console.error(error.message)
-  }
 }
 
 function showTitle () {
@@ -72,8 +72,7 @@ async function getNews (birthday) {
   if (response) {
     return response
   } else {
-    throw new Error('The API key is incorrect. Please check it again.'
-    )
+    throw new Error('The API key is incorrect. Please check it again.')
   }
 }
 
@@ -101,5 +100,4 @@ function getNewsIndexNum (news) {
   }
   return newsIndexNum
 }
-
 main()
