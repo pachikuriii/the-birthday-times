@@ -8,10 +8,22 @@ const color = require('ansi-colors')
 const { setTimeout } = require('timers/promises')
 
 async function main () {
+  checkApiKey()
   showTitle()
-  const birthday = new Birthday(await getBirthday())
+  const birthday = await getBirthday()
+  const news = await getNews(birthday)
   await loadingMessage()
-  birthday.displayNews(await birthday.getNews())
+  displayNews(news)
+}
+
+function checkApiKey () {
+  try {
+    if (!process.env.NYTIMES_KEY) {
+      throw new Error(color.red("Please set your API key on your operating system.\nTo set environment variables on macOS or Linux, run the export command from the terminal: export NYTIMES_KEY='YOUR-API-KEY'\n"))
+    }
+  } catch (error) {
+    console.error(error.message)
+  }
 }
 
 function showTitle () {
@@ -55,57 +67,39 @@ async function loadingMessage () {
   await setTimeout(1000)
 }
 
-class Birthday {
-  constructor (birthday) {
-    this.year = birthday.$y
-    this.month = birthday.$M
-    this.date = birthday.$D
+async function getNews (birthday) {
+  const response = await needle('get', `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=pub_date:(${birthday.$y}-${birthday.$M}-${birthday.$D})&api-key=${process.env.NYTIMES_KEY}`)
+  if (response) {
+    return response
+  } else {
+    throw new Error('The API key is incorrect. Please check it again.'
+    )
   }
+}
 
-  async getNews () {
-    this.#checkApiKey()
-    const response = await needle('get', `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=pub_date:(${this.year}-${this.month}-${this.date})&api-key=${process.env.NYTIMES_KEY}`)
-    if (response) {
-      return response
-    } else {
-      throw new Error('The API key is incorrect. Please check it again.'
-      )
+function displayNews (response) {
+  const newsIndexNum = getNewsIndexNum(response)
+  try {
+    for (let index = 0; index < newsIndexNum.length; index++) {
+      console.log(`🔎  ${color.bold.green.underline(response.body.response.docs[newsIndexNum[index]].headline.main)}\n\n` +
+      `${response.body.response.docs[newsIndexNum[index]].lead_paragraph}\n\n\n`)
+    }
+  } catch (error) {
+    console.error(error.message)
+  }
+}
+
+function getNewsIndexNum (response) {
+  const articleNum = response.body.response.docs.length
+  const newsIndexNum = []
+  while (newsIndexNum.length <= 2) {
+    const index = Math.floor(Math.random() * articleNum)
+    if (newsIndexNum[0] !== index &&
+      newsIndexNum[newsIndexNum.length - 1] !== index) {
+      newsIndexNum.push(index)
     }
   }
-
-  displayNews (news) {
-    const newsIndexNum = this.#getNewsIndexNum(news)
-    try {
-      for (let index = 0; index < newsIndexNum.length; index++) {
-        console.log(`🔎  ${color.bold.green.underline(news.body.response.docs[newsIndexNum[index]].headline.main)}\n` +
-        `${news.body.response.docs[newsIndexNum[index]].lead_paragraph}\n\n\n`)
-      }
-    } catch (error) {
-      console.error(error.message)
-    }
-  }
-
-  #checkApiKey () {
-    try {
-      if (!process.env.NYTIMES_KEY) {
-        throw new Error(color.red("Please set your API key on your operating system.\nTo set environment variables on macOS or Linux, run the export command from the terminal: export NYTIMES_KEY='YOUR-API-KEY'\n"))
-      }
-    } catch (error) {
-      console.error(error.message)
-    }
-  }
-
-  #getNewsIndexNum (response) {
-    const articleNum = response.body.response.docs.length
-    const newsIndexNum = []
-    while (newsIndexNum.length <= 2) {
-      const index = Math.floor(Math.random() * articleNum)
-      if (newsIndexNum[0] !== index && newsIndexNum[newsIndexNum.length - 1] !== index) {
-        newsIndexNum.push(index)
-      }
-    }
-    return newsIndexNum
-  }
+  return newsIndexNum
 }
 
 main()
