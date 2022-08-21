@@ -10,7 +10,7 @@ const { setTimeout } = require('timers/promises')
 async function main () {
   try {
     if (!process.env.NYTIMES_KEY) {
-      throw new Error(color.red("Please set your API key on your operating system.\nTo set environment variables on macOS or Linux, run the export command from the terminal: export NYTIMES_KEY='YOUR-API-KEY'"))
+      throwError()
     }
     showTitle()
     const birthday = await getBirthday()
@@ -20,6 +20,10 @@ async function main () {
   } catch (error) {
     console.error(error.message)
   }
+}
+
+function throwError () {
+  throw new Error(color.red("Please set your API key on your operating system.\nTo set environment variables on macOS or Linux, run the export command from the terminal: export NYTIMES_KEY='YOUR-API-KEY'"))
 }
 
 function showTitle () {
