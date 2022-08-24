@@ -96,4 +96,5 @@ function getNewsIndexNum (news) {
   }
   return newsIndexNum
 }
+
 main()
