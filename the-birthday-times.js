@@ -8,22 +8,18 @@ const color = require('ansi-colors')
 const { setTimeout } = require('timers/promises')
 
 async function main () {
-  try {
-    if (!process.env.NYTIMES_KEY) {
-      throwError()
-    }
-    showTitle()
-    const birthday = await getBirthday()
-    const news = await getNews(birthday)
-    await loadingMessage()
-    displayNews(news)
-  } catch (error) {
-    console.error(error.message)
-  }
+  ensureApiKey()
+  showTitle()
+  const birthday = await getBirthday()
+  const news = await getNews(birthday)
+  await loadingMessage()
+  displayNews(news)
 }
 
-function throwError () {
-  throw new Error(color.red("Please set your API key on your operating system.\nTo set environment variables on macOS or Linux, run the export command from the terminal: export NYTIMES_KEY='YOUR-API-KEY'"))
+function ensureApiKey () {
+  if (!process.env.NYTIMES_KEY) {
+    throw new Error(color.red("Please set your API key on your operating system.\nTo set environment variables on macOS or Linux, run the export command from the terminal: export NYTIMES_KEY='YOUR-API-KEY'"))
+  }
 }
 
 function showTitle () {
