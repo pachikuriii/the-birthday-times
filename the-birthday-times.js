@@ -45,12 +45,16 @@ async function getBirthday () {
       name: 'birthday',
       message: '🎂 Your Birthday?',
       mask: ('YYYY-MM-DD'),
-      validate: date => date > dayjs()
-        ? 'Not in the future'
-        : true &&
-          date < dayjs('1981/1/1')
-          ? 'Not before 1981'
-          : true
+      validate:
+        date => {
+          if (date > dayjs()) {
+            return 'Not in the future'
+          }
+          if (date < dayjs('1981/1/1')) {
+            return 'Not before 1981'
+          }
+          return date
+        }
     }
   ]
   const answer = await prompts(question)
