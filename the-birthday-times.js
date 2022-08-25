@@ -8,12 +8,16 @@ const color = require('ansi-colors')
 const { setTimeout } = require('timers/promises')
 
 async function main () {
-  ensureApiKey()
-  showTitle()
-  const birthday = await getBirthday()
-  const news = await getNews(birthday)
-  await loadingMessage()
-  displayNews(news)
+  try {
+    ensureApiKey()
+    showTitle()
+    const birthday = await getBirthday()
+    const news = await getNews(birthday)
+    await loadingMessage()
+    displayNews(news)
+  } catch (error) {
+    console.log(error.message)
+  }
 }
 
 function ensureApiKey () {
