@@ -13,7 +13,7 @@ async function main () {
     showTitle()
     const birthday = await getBirthday()
     const news = await getNews(birthday)
-    await loadingMessage()
+    await showLoadingMessage()
     displayNews(news)
   } catch (error) {
     console.log(error.message)
@@ -57,7 +57,7 @@ async function getBirthday () {
   return dayjs(answer.birthday).add(1, 'month')
 }
 
-async function loadingMessage () {
+async function showLoadingMessage () {
   process.stdout.write('\n\n\n                 .')
   for (let index = 0; index <= 3; index++) {
     await setTimeout(700)
