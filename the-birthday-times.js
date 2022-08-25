@@ -63,7 +63,7 @@ async function getBirthday () {
 
 async function showLoadingMessage () {
   process.stdout.write('\n\n\n                 .')
-  for (let index = 0; index <= 3; index++) {
+  for (let count = 0; count < 4; count++) {
     await setTimeout(700)
     process.stdout.write('.')
   }
