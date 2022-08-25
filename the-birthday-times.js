@@ -6,6 +6,7 @@ const prompts = require('prompts')
 const dedent = require('dedent')
 const color = require('ansi-colors')
 const { setTimeout } = require('timers/promises')
+const _ = require('lodash')
 
 async function main () {
   try {
@@ -93,16 +94,8 @@ function displayNews (news) {
 }
 
 function getNewsIndexNum (news) {
-  const articleNum = news.body.response.docs.length
-  const newsIndexNum = []
-  while (newsIndexNum.length <= 2) {
-    const index = Math.floor(Math.random() * articleNum)
-    if (newsIndexNum[0] !== index &&
-      newsIndexNum[newsIndexNum.length - 1] !== index) {
-      newsIndexNum.push(index)
-    }
-  }
-  return newsIndexNum
+  const allNewsIndexNum = [...Array(news.body.response.docs.length).keys()]
+  return _.sampleSize(allNewsIndexNum, 3)
 }
 
 main()
