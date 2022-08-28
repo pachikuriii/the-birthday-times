@@ -18,9 +18,10 @@ $ npm i -g the-birthday-times
 ```
 $ export NYTIMES_KEY='YOUR-API-KEY'
 ```
-🔑  You need The New York Times Developer Network account to create API key.
-
-More info is [here](https://developer.nytimes.com/get-started)
+🔑  You need The New York Times Developer Network account to create API key.  
+More info is [here](https://developer.nytimes.com/get-started).  
+After creating the API key, enable the **Article Search API** on "My Apps" as below.  
+![image](https://user-images.githubusercontent.com/58751858/184480839-49553fc8-0f3a-488f-a441-206774f9df7b.png)
 
 
 ## 2. Run `$ the-birthday-times`
